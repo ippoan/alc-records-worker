@@ -1,0 +1,32 @@
+# 行カバレッジ 100% の登録簿 (ippoan/alc-carins-worker の同名のファイルの形。Refs ippoan/rust-alc-api#680)。
+#
+#   bash scripts/fetch-migrations.sh
+#   RECORDS_TEST_ADMIN_DATABASE_URL=... cargo llvm-cov --locked -p records --text > cov-records.txt
+#   bash scripts/check_coverage_100.sh --use-cache cov-records.txt
+#
+# 計測するのは `cargo test -p records` の全部 = 各 module の単体テストと tests/items_db.rs・records_db.rs
+# (口から実 DB まで。接続先が無ければ失敗する)。worker 本体 (直下の src/、wasm 専用) は native で計測できないので対象外。
+
+# tenant の layer・DB と R2 の失敗の語・頁・router の組み立て
+[[files]]
+path = "crates/records/src/lib.rs"
+
+# 取り出しの Content-Disposition (inline・ASCII だけ)
+[[files]]
+path = "crates/records/src/store.rs"
+
+# 物品 (木・検索・移動・持ち主・種類の切り替え) と物品のファイル (R2 はモック)
+[[files]]
+path = "crates/records/src/items.rs"
+
+# 携行品 (車両の条件の作成・置き換え)
+[[files]]
+path = "crates/records/src/carrying.rs"
+
+# 伝達事項 (一覧・有効なものだけ・部分の更新)
+[[files]]
+path = "crates/records/src/communication.rs"
+
+# 指導記録 (3 階層の木・再帰の削除) と添付 (R2 はモック。rust の URL の形も読む)
+[[files]]
+path = "crates/records/src/guidance.rs"
